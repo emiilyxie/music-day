@@ -467,7 +467,7 @@ function App() {
 
   let date = new Date();
   let hours = date.getHours();
-  hours = 10;
+  //hours = 10;
 
   useEffect(() => {
     let screenBg = document.getElementById("screen-background");

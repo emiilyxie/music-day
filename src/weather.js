@@ -16,7 +16,7 @@ export function getWeather(adjust) {
   .then(function(data) {
     //console.log(data.weather[0].id);
     let weatherID = data.weather[0].id;
-    //weatherID = 603;
+    //weatherID = 503;
     adjust(weatherID);
   })
   .catch(function() {
