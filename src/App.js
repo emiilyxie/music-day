@@ -1,21 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 import * as Tone from "tone";
-import useSound from 'use-sound';
 import G from 'glob';
+import Granim from 'react-granim'
+import { useEffect } from 'react';
+/*
 import bassmp3 from './sounds/bass1.mp3';
 import hihatmp3 from './sounds/drumhihat1.mp3';
 import vibesmp3 from './sounds/vibes1.mp3';
 import guitarwav from './sounds/guitar1.wav';
 import tambourinewav from './sounds/tambourine.wav';
-
-const bodyParser = require("body-parser");
-const request = require("request");
+*/
+import * as MusicVars from './musicVars.js';
+import * as MusicFuncs from './music.js';
+import { getWeather } from './weather';
+import { Helmet } from "react-helmet";
 
 const { Chord, Progression, Scale } = require("@tonaljs/tonal");
 
 function App() {
-
+  /*
   // declare samples
   const piano = new Tone.Sampler({
     urls: {
@@ -208,7 +212,9 @@ function App() {
     [twoThreeClaveRhythm2, twoThreeClaveRhythm1],
     [eigthNoteRhythm]
   ]
+  */
 
+  /*
   // get random integer
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -301,115 +307,114 @@ function App() {
       });
       return parts;
     }
+  */
   // declare tempo
   let bpm = 80;
   let progression, progRhythm, bassRhythm, percRhythm;
   let progDuration, bassNotes, percNotes;
   let melodyInst, progInst, bassInst, percInst;
+  getWeather();
   
   function setMorning() {
-    progression = twoFiveOne;
-    bpm = getRandomInt(60) + 100;
+    progression = MusicVars.twoFiveOne;
+    bpm = MusicFuncs.getRandomInt(60) + 100;
 
-    progRhythm = [daytimeRhythm1, daytimeRhythm2];
-    bassRhythm = [dottedQuarterEigth, dottedQuarterEigth];
-    bassNotes = getBassNotes(progression);
-    percRhythm = [twoThreeClaveRhythm1, twoThreeClaveRhythm2];
+    progRhythm = [MusicVars.daytimeRhythm1, MusicVars.daytimeRhythm2];
+    bassRhythm = [MusicVars.dottedQuarterEigth, MusicVars.dottedQuarterEigth];
+    bassNotes = MusicFuncs.getBassNotes(progression);
+    percRhythm = [MusicVars.twoThreeClaveRhythm1, MusicVars.twoThreeClaveRhythm2];
     percNotes = ["C1", "C1"];
     progDuration = "8n"
 
-    melodyInst = synth;
-    piano.volume.value = -8;
-    progInst = piano;
-    bassInst = bassPluck;
-    percInst = kickDrum;
+    melodyInst = MusicVars.synth;
+    MusicVars.piano.volume.value = -8;
+    progInst = MusicVars.piano;
+    bassInst = MusicVars.bassPluck;
+    percInst = MusicVars.kickDrum;
   }
 
   function setAfternoon() {
-    progression = autumnLeaves;
-    bpm = getRandomInt(60) + 80;
+    progression = MusicVars.autumnLeaves;
+    bpm = MusicFuncs.getRandomInt(60) + 80;
 
-    progRhythm = [daytimeRhythm1, daytimeRhythm2];
-    bassRhythm = [oneFourRhythm];
-    bassNotes = getBassNotes(progression);
-    percRhythm = [twoThreeClaveRhythm2];
+    progRhythm = [MusicVars.daytimeRhythm1, MusicVars.daytimeRhythm2];
+    bassRhythm = [MusicVars.oneFourRhythm, MusicVars.oneFourRhythm];
+    bassNotes = MusicFuncs.getBassNotes(progression);
+    percRhythm = [MusicVars.twoThreeClaveRhythm2];
     percNotes = ["C1", "C1"];
     progDuration = "8n"
 
-    melodyInst = guitar;
-    synth.volume.value = -20;
-    progInst = synth;
-    bassInst = bassPluck;
-    percInst = kickDrum;
+    melodyInst = MusicVars.guitar;
+    MusicVars.synth.volume.value = -20;
+    progInst = MusicVars.synth;
+    bassInst = MusicVars.bassPluck;
+    percInst = MusicVars.kickDrum;
   }
 
   function setNight() {
-    let progressionIndex = getRandomInt(progressions.length)
-    progression = nardisBridge;
-    bpm = getRandomInt(30) + 50;
+    progression = MusicVars.nardisBridge;
+    bpm = MusicFuncs.getRandomInt(30) + 50;
 
-    progRhythm = [oneFourRhythm, oneNote];
-    bassRhythm = [dottedQuarterEigth, dottedQuarterEigth];
-    bassNotes = getBassNotes(progression);
-    percRhythm = [twoThreeClaveRhythm1, twoThreeClaveRhythm2];
+    progRhythm = [MusicVars.oneFourRhythm, MusicVars.oneNote];
+    bassRhythm = [MusicVars.dottedQuarterEigth, MusicVars.dottedQuarterEigth];
+    bassNotes = MusicFuncs.getBassNotes(progression);
+    percRhythm = [MusicVars.twoThreeClaveRhythm1, MusicVars.twoThreeClaveRhythm2];
     percNotes = ["C1", "C1"];
     progDuration = "1m"
 
-    melodyInst = piano;
-    progInst = piano;
+    melodyInst = MusicVars.piano;
+    progInst = MusicVars.piano;
     bassInst = null;
     percInst = null;
   }
 
   function setRainy() {
-    let progressionIndex = getRandomInt(progressions.length)
-    progression = rainingOutsideProg;
-    bpm = getRandomInt(40) + 80;
+    progression = MusicVars.rainingOutside;
+    bpm = MusicFuncs.getRandomInt(40) + 80;
 
-    progRhythm = [oneNote];
-    bassRhythm = [dottedQuarterEigth, dottedQuarterEigth];
-    bassNotes = getBassNotes(progression);
-    percRhythm = [twoThreeClaveRhythm1, twoThreeClaveRhythm2];
+    progRhythm = [MusicVars.oneNote];
+    bassRhythm = [MusicVars.dottedQuarterEigth, MusicVars.dottedQuarterEigth];
+    bassNotes = MusicFuncs.getBassNotes(progression);
+    percRhythm = [MusicVars.twoThreeClaveRhythm1, MusicVars.twoThreeClaveRhythm2];
     percNotes = ["C1", "C1"];
     progDuration = "1m"
 
-    bell.volume.value = 0;
-    melodyInst = bell;
-    synth.volume.value = -25;
-    progInst = synth;
-    bell.volume.value = -15;
-    bassInst = bell;
-    percInst = hihat;
+    MusicVars.bell.volume.value = 0;
+    melodyInst = MusicVars.bell;
+    MusicVars.synth.volume.value = -25;
+    progInst = MusicVars.synth;
+    MusicVars.bell.volume.value = -15;
+    bassInst = MusicVars.bell;
+    percInst = MusicVars.hihat;
   }
 
   function setSnowy() {
-    let progressionIndex = getRandomInt(progressions.length)
-    progression = ipanema;
-    bpm = getRandomInt(60) + 80;
+    progression = MusicVars.ipanema;
+    bpm = MusicFuncs.getRandomInt(60) + 80;
 
-    progRhythm = [dottedQuarterEigth];
-    bassRhythm = [daytimeRhythm1];
-    bassNotes = getBassNotes(progression);
-    percRhythm = [twoFourEigthRhythm];
+    progRhythm = [MusicVars.dottedQuarterEigth];
+    bassRhythm = [MusicVars.daytimeRhythm1];
+    bassNotes = MusicFuncs.getBassNotes(progression);
+    percRhythm = [MusicVars.twoFourEigthRhythm];
     percNotes = ["C1", "C1"];
     progDuration = "1m"
 
-    melodyInst = piano;
-    bell.volume.value = -25;
-    progInst = bell;
+    melodyInst = MusicVars.piano;
+    MusicVars.bell.volume.value = -25;
+    progInst = MusicVars.bell;
     bassInst = null;
-    percInst = tambourine;
+    percInst = MusicVars.tambourine;
   }
 
-  setSnowy();
-
-  const melody1 = generateMelody(progression, 8);
-  const melodyPart1 = makeMelody(melodyInst, melody1, false, '0:0');
-  const perc1 = makeProgression(percInst, percNotes, "8n", percRhythm, 1, true, '2:0');
-  const backingChords1 = makeProgression(progInst, progression, progDuration, progRhythm, 
-    1, false, '8:0');
-  const bass1 = makeProgression(bassInst, bassNotes, '8n', bassRhythm, 
-    1, false, '8:0');
+  function startSong() {
+    const melody1 = MusicFuncs.generateMelody(progression, 8);
+    const melodyPart1 = MusicFuncs.makeMelody(melodyInst, melody1, false, '0:0');
+    const perc1 = MusicFuncs.makeProgression(percInst, percNotes, "8n", percRhythm, 1, true, '2:0');
+    const backingChords1 = MusicFuncs.makeProgression(progInst, progression, progDuration, progRhythm, 
+      1, false, '8:0');
+    const bass1 = MusicFuncs.makeProgression(bassInst, bassNotes, '8n', bassRhythm, 
+      1, false, '8:0');
+  }
 
   function startTone() {
     //console.log(melody1);
@@ -419,22 +424,81 @@ function App() {
       Tone.Transport.loop = true;
       Tone.Transport.loopEnd = '8:0';
       Tone.Transport.start();
+      startSong();
     } else {
       Tone.Transport.stop();
     }
   }
 
+  function adjustForWeather(weatherID) {
+    let screenBg = document.getElementById("screen-background");
+    let startButton = document.getElementById("start-button");
+    let weatherMain = Math.floor(weatherID / 100);
+    //console.log(weatherMain);
+    let taggedWeathers = [2, 3, 5, 6];
+    if (taggedWeathers.includes(weatherMain)) {
+      screenBg.classList.remove('background-morning');
+      screenBg.classList.remove('background-afternoon');
+      screenBg.classList.remove('background-night');
+      screenBg.classList.remove('background-rain');
+      screenBg.classList.remove('background-snow');
+    }
+    if (weatherMain == 2) {
+      screenBg.classList.add('background-rain');
+      setRainy();
+      startButton.textContent = "thunderstorms outside.";
+    }
+    if (weatherMain == 3) {
+      screenBg.classList.add('background-rain');
+      setRainy();
+      startButton.textContent = "a small drizzle.";
+    }
+    if (weatherMain == 5) {
+      screenBg.classList.add('background-rain');
+      setRainy();
+      startButton.textContent = "rainy day.";
+    }
+    if (weatherMain == 6) {
+      screenBg.classList.add('background-snow');
+      setSnowy();
+      startButton.textContent = "snowy!";
+    }
+  }
+
+  let date = new Date();
+  let hours = date.getHours();
+  hours = 10;
+
+  useEffect(() => {
+    let screenBg = document.getElementById("screen-background");
+    let startButton = document.getElementById("start-button");
+    screenBg.classList.remove('background-morning');
+    screenBg.classList.remove('background-afternoon');
+    screenBg.classList.remove('background-night');
+    screenBg.classList.remove('background-rain');
+    screenBg.classList.remove('background-snow');
+    if (hours >= 20 || hours < 6) {
+      screenBg.classList.add('background-night');
+      setNight();
+      startButton.textContent = "it's nighttime.";
+    }
+    else if (6 <= hours && hours < 15) {
+      screenBg.classList.add('background-morning');
+      setMorning();
+      startButton.textContent = "good morning!";
+    }
+    else if (15 <= hours && hours < 20) {
+      screenBg.classList.add('background-afternoon');
+      setAfternoon();
+      startButton.textContent = "a lazy afternoon...";
+    }
+
+    getWeather(adjustForWeather);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-      <button className="note" onClick={() => startTone()}>
-          Start
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload!!
-        </p>
-      </header>
+    <div id="screen-background" className="animated-background background-afternoon">
+      <button id='start-button' onClick={() => startTone()}>Start</button>
     </div>
   );
 }
