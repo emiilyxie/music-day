@@ -13,7 +13,7 @@ export function getWeather(location, adjust) {
   })
   .catch(function() {
     // catch any errors
-    print("could not get weather data");
+    console.log("could not get weather data");
 
     // website is still fine, just shows time of day
   });
