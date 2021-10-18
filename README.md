@@ -10,3 +10,11 @@ Demo is located at http://emily.xie.fm/activities/music-day/. To play the music,
 * Afternoon: 3 p.m. to 7:59 p.m.
 * Night: 8 p.m. to 5:59 a.m.<br />
 If it is raining or snowing, the webpage will update accordingly.
+
+## Project Structure
+* src/App.js: main application code
+* src/music.js: functions for music manipulation
+* src/musicVars.js: variables for music generation
+* src/sounds: contains sound sample files
+* src/weather.js: weather api call
+* src/index.css: website styling
