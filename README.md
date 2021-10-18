@@ -8,5 +8,5 @@ Demo is located at http://emily.xie.fm/activities/music-day/. To play the music,
 ## Hours
 * Morning: 6 a.m. to 2:59 p.m.
 * Afternoon: 3 p.m. to 7:59 p.m.
-* Night: 8 p.m. to 5:59 a.m.
+* Night: 8 p.m. to 5:59 a.m.<br />
 If it is raining or snowing, the webpage will update accordingly.
