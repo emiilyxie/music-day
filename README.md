@@ -3,7 +3,7 @@ A web application that generates new background music depending on your location
 Created with Tone.js and the OpenWeather API.
 
 ## Demo
-Demo is located at http://emily.xie.fm/activities/music-day/. To play the music, please click on the text in the center of the page. Refresh the page for a slightly different song each time!
+Demo is located at http://emily.xie.fm/activities/musicday/. To play the music, please click on the text in the center of the page. Refresh the page for a slightly different song each time!
 
 ## Hours
 * Morning: 6 a.m. to 2:59 p.m.
