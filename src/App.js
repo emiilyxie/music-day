@@ -206,7 +206,10 @@ function App() {
 
   return (
     <div id="screen-background" className="animated-background background-afternoon">
-      <button id='start-button' onClick={() => startTone()}>music day</button>
+      <div class='container'>
+        <button id='start-button' onClick={() => startTone()}>music day</button>
+        <p>click the button to play + pause!</p>
+      </div>
     </div>
   );
 }
