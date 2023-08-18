@@ -4,7 +4,9 @@ const apiKey = config.API_KEY;
 
 // get weather with openweather api
 export function getWeather(location, adjust) {
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=' + apiKey)  
+  let lat = 40
+  let lon = -79
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)  
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
     let weatherID = data.weather[0].id;
