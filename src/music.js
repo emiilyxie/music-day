@@ -85,6 +85,13 @@ export function makeProgression(instrument, progression, duration, rhythms,
     let counter = 0;
     let rhythm = rhythms[counter];
     progression.forEach(chord => {
+      // adjust chord if necessary
+      if (Array.isArray(chord)) {
+        for (let i = 0; i < chord.length; i++) {
+          chord[i] = chord[i].replace("##", "#")
+        }
+      }
+
       let measure = start + "m";
       const part = makePerc(instrument, chord, duration, rhythm,
         measure, loop, loopEnd);

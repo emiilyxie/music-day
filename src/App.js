@@ -187,12 +187,12 @@ function App() {
       setNight();
       startButton.textContent = "it's nighttime.";
     }
-    else if (6 <= hours && hours < 15) {
+    else if (6 <= hours && hours < 13) {
       screenBg.classList.add('background-morning');
       setMorning();
       startButton.textContent = "good morning!";
     }
-    else if (15 <= hours && hours < 20) {
+    else if (13 <= hours && hours < 20) {
       screenBg.classList.add('background-afternoon');
       setAfternoon();
       startButton.textContent = "a lazy afternoon...";
